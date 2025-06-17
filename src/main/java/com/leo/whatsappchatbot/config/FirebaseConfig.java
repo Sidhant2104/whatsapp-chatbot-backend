@@ -15,17 +15,26 @@ public class FirebaseConfig {
     @PostConstruct
     public void initialize() {
         try {
-            InputStream serviceAccount = getClass().getClassLoader()
-                    .getResourceAsStream("firebase-service-account.json");
+            String firebaseConfig = System.getenv("FIREBASE_CONFIG");
+            if (firebaseConfig == null) {
+                throw new IllegalArgumentException("FIREBASE_CONFIG env variable not found");
+            }
+
+            byte[] decodedBytes = java.util.Base64.getDecoder().decode(firebaseConfig);
+            InputStream serviceAccount = new java.io.ByteArrayInputStream(decodedBytes);
+
             FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
 
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
-                System.out.println("✅ Firebase connected successfully!");
+                System.out.println("Firebase connected successfully using env config!");
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.err.println("Firebase init failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 }
