@@ -44,7 +44,16 @@ src/
      └── resources/
          └── application.properties
          └── firebase-service-account.json (local only)
+
 ```
+
+## 🛠️ Tech Stack
+- Java 17
+- Spring Boot 3.x
+- Firebase Admin SDK
+- Render Deployment
+- Postman for testing
+- GitHub for Version Control
 
 ---
 
@@ -83,11 +92,20 @@ Hey there! 👋 How can I assist you today?
 
 ## 🌐 Live Deployment (Render)
 
-- Build & Start Commands:
-  - Build: `mvn clean install`
-  - Start: `java -jar target/*.jar`
-- Use base64 encoded Firebase key as environment variable (`FIREBASE_CONFIG`)
-- Update `FirebaseConfig.java` to decode and use this env variable
+🔗 Live URL
+https://whatsapp-chatbot-b8pf.onrender.com/webhook
+
+📦 GitHub Repository
+https://github.com/Sidhant2104/whatsapp-chatbot-backend.git
+
+🧪 Deployment Status
+
+Working ✅ (Tested with Postman, returns correct responses via webhook)
+
+---
+
+## ⚠️ Meta API Info
+> Tried setting up WhatsApp Business Cloud API but account got disabled during Meta business review stage. Backend system remains functional & ready to integrate once account is restored.
 
 ---
 
