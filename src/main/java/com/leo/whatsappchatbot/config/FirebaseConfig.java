@@ -6,8 +6,9 @@ import com.google.firebase.FirebaseOptions;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Base64;
 
 @Component
 public class FirebaseConfig {
@@ -15,13 +16,16 @@ public class FirebaseConfig {
     @PostConstruct
     public void initialize() {
         try {
-            String firebaseConfig = System.getenv("FIREBASE_CONFIG");
-            if (firebaseConfig == null) {
-                throw new IllegalArgumentException("FIREBASE_CONFIG env variable not found");
+            // Read the environment variable
+            String firebaseConfigBase64 = System.getenv("FIREBASE_CONFIG");
+
+            if (firebaseConfigBase64 == null) {
+                throw new RuntimeException("FIREBASE_CONFIG environment variable not found");
             }
 
-            byte[] decodedBytes = java.util.Base64.getDecoder().decode(firebaseConfig);
-            InputStream serviceAccount = new java.io.ByteArrayInputStream(decodedBytes);
+            // Decode it
+            byte[] decodedBytes = Base64.getDecoder().decode(firebaseConfigBase64);
+            InputStream serviceAccount = new ByteArrayInputStream(decodedBytes);
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -29,12 +33,12 @@ public class FirebaseConfig {
 
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
-                System.out.println("Firebase connected successfully using env config!");
+                System.out.println("Firebase connected successfully!");
             }
+
         } catch (Exception e) {
-            System.err.println("Firebase init failed: " + e.getMessage());
             e.printStackTrace();
+            throw new RuntimeException("Firebase initialization failed: " + e.getMessage());
         }
     }
-
 }
