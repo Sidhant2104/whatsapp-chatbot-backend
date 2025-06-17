@@ -98,9 +98,16 @@ https://whatsapp-chatbot-b8pf.onrender.com/webhook
 📦 GitHub Repository
 https://github.com/Sidhant2104/whatsapp-chatbot-backend.git
 
-🧪 Deployment Status
+### 🚀 Render Deployment Instructions
 
-Working ✅ (Tested with Postman, returns correct responses via webhook)
+bash
+Build Command:        ./mvnw clean install
+Start Command:        java -jar target/*.jar
+Environment Variable: FIREBASE_CONFIG = <your_base64_encoded_firebase_service_account.json>
+
+✅ Status: Live and tested  
+🧪 Tested Via: Postman (POST /webhook)  
+📨 Response: Verified replies to commands like /hi, /help, etc.
 
 ---
 
@@ -112,7 +119,7 @@ Working ✅ (Tested with Postman, returns correct responses via webhook)
 ## ✨ Developed By
 
 **Sidhant Singh (Leo)**  
-Backend Developer | Java | Spring Boot  
+Aspiring Backend Developer | Java | Spring Boot  
 📍 Ranchi, Jharkhand  
 🌐 [GitHub Profile](https://github.com/Sidhant2104)  
 🔗 [LinkedIn](www.linkedin.com/in/sidhant-singh-47198b2a6)
