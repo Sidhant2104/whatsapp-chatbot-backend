@@ -100,7 +100,7 @@ https://github.com/Sidhant2104/whatsapp-chatbot-backend.git
 
 ### 🚀 Render Deployment Instructions
 
-bash
+```bash
 Build Command:        ./mvnw clean install
 Start Command:        java -jar target/*.jar
 Environment Variable: FIREBASE_CONFIG = <your_base64_encoded_firebase_service_account.json>
@@ -108,7 +108,7 @@ Environment Variable: FIREBASE_CONFIG = <your_base64_encoded_firebase_service_ac
 ✅ Status: Live and tested  
 🧪 Tested Via: Postman (POST /webhook)  
 📨 Response: Verified replies to commands like /hi, /help, etc.
-
+```
 ---
 
 ## ⚠️ Meta API Info
